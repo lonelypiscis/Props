@@ -20,7 +20,5 @@ repositories {
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.spongepowered:spongeapi:6.0.0'
-    
-    testCompile 'junit:junit:4.12'
 }
 
