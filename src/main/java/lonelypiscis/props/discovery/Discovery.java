@@ -25,28 +25,33 @@ public final class Discovery extends PNS {
 	public Path path_configDir;
 
 	public Path path_modelSources;
-	
+
 	/**
-	 * Reads all .conf files and stores an according StructProp object in the output array.
+	 * Reads all prop header files (indicated by .conf suffix) and stores an
+	 * according StructProp object in the output array.
 	 * 
 	 * @param sourceDirIn
 	 * @param propStructsOut
 	 */
 
 	public void readSourceFiles(Path sourceDirIn, ArrayList<StructProp> propStructsOut) {
-		if (sourceDirIn.toFile().isFile()) throw new IllegalArgumentException("sourceDirIn must be a directory.");
-		if (!sourceDirIn.toFile().exists()) throw new IllegalArgumentException("The directory specified by sourceDirIn does not exist.");
-		
+		// Validate source directory
+		if (sourceDirIn.toFile().isFile())
+			throw new IllegalArgumentException("sourceDirIn must be a directory.");
+		if (!sourceDirIn.toFile().exists())
+			throw new IllegalArgumentException("The directory specified by sourceDirIn does not exist.");
+
 		for (File sourceFile : sourceDirIn.toFile().listFiles()) {
+
+			// Validate source file
 			if (sourceFile.isFile() && sourceFile.getName().contains("conf")) {
 				ConfigurationLoader<CommentedConfigurationNode> loader = HoconConfigurationLoader.builder()
 						.setFile(sourceFile).build();
 
 				try {
-					ConfigurationNode root = loader.load();
+					// Load file and read data into a prop data structure
+					StructProp structPropOut = loader.load().getValue(TypeToken.of(StructProp.class));
 
-					StructProp structPropOut = root.getValue(TypeToken.of(StructProp.class));
-					
 					propStructsOut.add(structPropOut);
 				} catch (IOException e) {
 					e.printStackTrace();
