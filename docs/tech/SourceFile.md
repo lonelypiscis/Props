@@ -8,7 +8,8 @@ They are found in the Props config directory at `/config/props/source/headers/` 
 
 Currently, the following tags are available:
 
-| Tag       |                                                                                      |
-| --------- | ------------------------------------------------------------------------------------ |
-| prop_id   | The prop's id as it is registered in the system                                      |
-| prop_name | The prop's name as seen by the user                                  |
+| Tag       | Explanation                                                                          | Possible values	    |
+| --------- | ------------------------------------------------------------------------------------ | :--------------------: |
+| prop_id   | The prop's id as it is registered in the system                                      | N/A		  			|
+| prop_name | The prop's name as seen by the user                                  				   | N/A					|
+| prop_type	| Specifies how a prop will be treated												   | block; item;			|
